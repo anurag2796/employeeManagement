@@ -2,6 +2,8 @@ package com.kart.employeeManagement.service;
 
 import com.kart.employeeManagement.data.Employee;
 import com.kart.employeeManagement.repository.EmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,14 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeDatabase;
 
+
+    private Logger logger = LoggerFactory.getLogger(EmployeeService.class);
+
     // Create a method to save an employee
     public Employee saveEmployee(Employee employee) {
-        // Call the saveEmployee method of EmployeeDatabase
+        // Call the saveEmployee method of
+        logger.info("Creating in employeeDatabase", employee);
+
         return employeeDatabase.saveEmployee(employee);
     }
 

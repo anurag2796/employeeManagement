@@ -2,6 +2,8 @@ package com.kart.employeeManagement.controller;
 
 import com.kart.employeeManagement.data.Employee;
 import com.kart.employeeManagement.service.EmployeeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     // Create a method to handle the POST request to save an employee
     @PostMapping
     public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) {
         // Call the saveEmployee method of EmployeeService and return the response
+        logger.info("Creating employee: {}", employee);
         Employee savedEmployee = employeeService.saveEmployee(employee);
+        logger.info("Created: {}", employee);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
@@ -29,6 +35,7 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<Employee> findEmployeeById(@PathVariable String id) {
         // Call the findEmployeeById method of EmployeeService and return the response
+        logger.info("Getting employee by id: {}", id);
         Employee foundEmployee = employeeService.findEmployeeById(id);
         return new ResponseEntity<>(foundEmployee, HttpStatus.OK);
     }
@@ -45,6 +52,7 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployeeById(@PathVariable String id, @RequestBody Employee employee) {
         // Call the updateEmployeeById method of EmployeeService and return the response
+        logger.info("Updating employee by id: {}", id);
         Employee updatedEmployee = employeeService.updateEmployeeById(id, employee);
         return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
     }
@@ -53,6 +61,7 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployeeById(@PathVariable String id) {
         // Call the deleteEmployeeById method of EmployeeService and return the response
+        logger.info("Deleting employee by id: {}", id);
         employeeService.deleteEmployeeById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

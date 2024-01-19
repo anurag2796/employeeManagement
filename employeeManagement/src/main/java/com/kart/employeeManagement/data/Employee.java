@@ -1,17 +1,19 @@
 package com.kart.employeeManagement.data;
 
+import com.kart.employeeManagement.constant.Department;
 import lombok.Data;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
 @Data
 public class Employee implements Comparable<Employee> {
     private String id;
     private String firstName;
     private String lastName;
     private String jobTitle;
-    private String department;
+    private Department department;
     private String email;
     private List<String> phoneNumber;
     private String hireDate;
@@ -21,7 +23,7 @@ public class Employee implements Comparable<Employee> {
 
     // Constructor
     public Employee(String id, String firstName, String lastName, String jobTitle,
-                    String department, String email, List<String> phoneNumber,
+                    Department department, String email, List<String> phoneNumber,
                     String hireDate, double salary, String managerName, String officeLocation) {
         this.id = id;
         this.firstName = firstName;
@@ -41,9 +43,9 @@ public class Employee implements Comparable<Employee> {
         this.firstName = "";
         this.lastName = "";
         this.jobTitle = "";
-        this.department = "";
+        this.department = Department.BENCH;
         this.email = "";
-        this.phoneNumber = Arrays.asList("","");
+        this.phoneNumber = Arrays.asList("", "");
         this.hireDate = "";
         this.salary = 0.0;
         this.managerName = "";
@@ -57,6 +59,24 @@ public class Employee implements Comparable<Employee> {
         return this.id.compareTo(other.id);
     }
 
+    @Override
+    public String toString() {
+        return
+
+                "Employee{" +
+                        "id='" + id + '\'' +
+                        ", firstName='" + firstName + '\'' +
+                        ", lastName='" + lastName + '\'' +
+                        ", jobTitle='" + jobTitle + '\'' +
+                        ", department=" + department +
+                        ", email='" + email + '\'' +
+                        ", phoneNumber=" + phoneNumber +
+                        ", hireDate='" + hireDate + '\'' +
+                        ", salary=" + salary +
+                        ", managerName='" + managerName + '\'' +
+                        ", officeLocation='" + officeLocation + '\'' +
+                        '}';
+    }
     // Comparators for alternative sorting:
 
     public static class SalaryComparator implements Comparator<Employee> {
