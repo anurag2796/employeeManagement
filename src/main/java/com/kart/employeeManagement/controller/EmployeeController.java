@@ -31,6 +31,15 @@ public class EmployeeController {
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
+    @PostMapping("/all")
+    public ResponseEntity<List<Employee>> saveEmployees(@RequestBody List<Employee> employees) {
+        // Call the saveEmployee method of EmployeeService and return the response
+        logger.info(" Creating employees ");
+        List<Employee> savedEmployee = employeeService.saveEmployees(employees);
+        logger.info("Created: {}", employees);
+        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
+    }
+
     // Create a method to handle the GET request to find an employee by id
     @GetMapping("/{id}")
     public ResponseEntity<Employee> findEmployeeById(@PathVariable String id) {

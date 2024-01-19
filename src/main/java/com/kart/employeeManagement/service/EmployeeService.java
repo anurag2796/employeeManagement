@@ -27,6 +27,17 @@ public class EmployeeService {
         return employeeDatabase.saveEmployee(employee);
     }
 
+    public List<Employee> saveEmployees(List<Employee> employee) {
+        // Call the saveEmployee method of
+        for (Employee e : employee) {
+            logger.info("Creating in employeeDatabase for employeeId", e.getId());
+            employeeDatabase.saveEmployee(e);
+        }
+        logger.info("Creating in employeeDatabase", employee);
+
+        return employee;
+    }
+
     // Create a method to find an employee by id
     public Employee findEmployeeById(String id) {
         // Call the findEmployeeById method of EmployeeDatabase
